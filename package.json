@@ -1,12 +1,12 @@
 {
     "name": "social-network-api",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "description": "API for a social network company",
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-      "start": "node index",
-      "dev": "nodemon index",
+      "start": "node index.js",
+      "dev": "nodemon index.js",
       "seed": "node utils/seed"
     },
     "dependencies": {
