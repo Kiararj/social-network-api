@@ -16,7 +16,7 @@ module.exports = {
       const thought = await Thought.findOne({ _id: req.params.thoughtId }).select('-__v');
 
       if (!thought) {
-        return res.status(404).json({ message: 'No course with that ID' });
+        return res.status(404).json({ message: 'No thought with that ID' });
       }
 
       res.json(thought);
@@ -90,5 +90,44 @@ module.exports = {
     } catch (err) {
       res.status(500).json(err);
     }
-  }
+  },
+  // Creates a reaction
+  async createReaction(req, res) {
+    try {
+        
+        const reaction = await Thought.findOneAndUpdate(
+            
+            { _id: req.params.thoughtId },
+            { $addToSet: { reactions: req.body } },
+            { runValidators: true, new: true }
+        );
+
+        if (!reaction) {
+            return res.status(404).json({ message: 'No thought with this ID!' });
+        }
+
+        res.json({ message: 'Reaction added!' })
+    } catch (err) {
+        res.status(500).json(err);
+    }
+},
+// Deletes a reaction
+async deleteReaction(req, res) {
+    try {
+
+        const reaction = await Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { runValidators: true, new: true }
+        );
+
+        if (!reaction) {
+            return res.status(404).json({ message: 'No thought with this id!' });
+        }
+
+        res.json({ message: 'Reaction deleted!' })
+    } catch (err) {
+        res.status(500).json(err);
+    }
 }
+};

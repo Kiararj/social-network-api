@@ -1,12 +1,12 @@
 // Imports necessary modules from the 'mongoose' package
-const { Schema, Types } = ('mongoose');
+const { Schema, Types } = require('mongoose');
 
 // Schema that creates a Reaction
 const reactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId()
+            default: () => new Types.ObjectId(),
         },
         reactionBody: {
             type: String,
