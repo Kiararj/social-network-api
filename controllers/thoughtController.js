@@ -36,7 +36,7 @@ module.exports = {
 
       if (!user) {
         return res.status(404).json({
-          message: 'Thought created, but found no user with that ID',
+          message: 'Thought created, but no user found with that ID',
         });
       }
 
